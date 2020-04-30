@@ -8,6 +8,15 @@ const botTypeClasses = {
   Witch: "icon magic",
   Captain: "icon star"
 };
+const url = "http://localhost:6001/bots"
+
+const deleteFromBackend = (id) => {
+  return fetch(url + '/' + id, {
+    method: 'delete'
+  })
+  .then(res => res.json())
+  .then(data => console.log(data))
+}
 
 const BotCard = props => {
   return (
@@ -15,7 +24,7 @@ const BotCard = props => {
       <div
         className="ui card"
         key={props.bot.id}
-        onClick={() => console.log("add code to connect event listener")}
+        onClick={() => props.addFavorite(props.bot)}
       >
         <div className="image">
           <img alt="oh no!" src={props.bot.avatar_url} />
@@ -48,7 +57,7 @@ const BotCard = props => {
               <button
                 className="ui mini red button"
                 onClick={() =>
-                  console.log("add code to connect event listener")
+                  deleteFromBackend(props.bot.id)
                 }
               >
                 x
