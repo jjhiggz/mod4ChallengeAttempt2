@@ -1,24 +1,26 @@
-import React, { Component } from "react";
+import React from "react";
 import BotCard from '../components/BotCard'
 
 
-class BotCollection extends Component {
+function BotCollection ( { bots , addFavorite , deleteBot } ){
   //your code here
-  showBots = (bots) => {
+ const showBots = ( bots ) => {
     return bots.map( bot => {
-      return <BotCard bot={bot} addFavorite={this.props.addFavorite}/>
+      return <BotCard 
+        bot={bot}
+        handleClick={ addFavorite }
+        deleteBot = { deleteBot }
+        />
     })
   }
-  render() {
     return (
       <div className="ui four column grid">
         <div className="row">
-          {this.showBots(this.props.bots)}
+          {showBots(bots)}
           Collection of all bots
         </div>
       </div>
     );
-  }
 }
 
 export default BotCollection;
